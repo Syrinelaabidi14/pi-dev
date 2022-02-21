@@ -1,0 +1,29 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Activitie List{% endblock %}
+
+{% block body %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for activitie in activities %}
+            <tr>
+                <td>{{ activitie.nom }}</td>
+                <td>{{ activitie.description }}</td>
+                <td>
+                    <a href="{{ path('activitie_delete', {'id': activitie.id}) }}">Delete</a>
+                    <a href="{{ path('activitie_edit', {'id': activitie.id}) }}">edit</a>
+                </td>
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

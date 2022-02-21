@@ -1,0 +1,39 @@
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="section-about">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 section-t8 position-relative">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-5">
+                            <img src="{{ asset('Upload/')}}{{ camping.image }}" alt="" class="img-fluid">
+                        </div>
+                        <div class="col-md-6 col-lg-5 section-md-t3">
+                            <div class="title-box-d">
+                                <h3 class="title-d">
+                                    <span class="color-d">{{ camping.nom }}</span>
+                                    <br>
+                                </h3>
+                            </div>
+                            <p class="color-text-a">
+                               Prix : {{ camping.prix }}
+                            </p>
+                            <p class="color-text-a">
+                               Localisation:  {{ camping.localisation }}
+                            </p>
+                            <p class="color-text-a">
+                                Date de Debut:  {{ camping.dateDeb ? camping.dateDeb|date('Y-m-d') : '' }}
+                            </p>
+                        </div>
+
+                    </div><br>
+                    <a href="{{ path('reservation_ron_new', {'id': camping.id}) }}" class="btn btn-danger">Participer</a>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
