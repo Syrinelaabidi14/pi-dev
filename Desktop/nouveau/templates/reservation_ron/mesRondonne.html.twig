@@ -1,7 +1,7 @@
 
 {% extends 'base.html.twig' %}
 
-{% block title %} Our Rondonne {% endblock %}
+{% block title %} nos randonnées {% endblock %}
 {% block body %}
     {% for camping in reservation_rons %}
 
@@ -29,12 +29,12 @@
                                 <strong>Date: </strong> {{ camping.idRon.dateDeb ? camping.idRon.dateDeb|date('Y-m-d') : '' }}
                             </p>
                             <p>
-                                <strong>Prix: </strong> {{ camping.idRon.prix }}<br><br><br><br>
+                                <strong>Prix: </strong> {{ camping.idRon.prix }}
                             </p>
                             <p>
-                                <a href="{{ path('reservation_ron_edit', {'id': camping.idRon.id}) }}" class="btn btn-primary" style="text-align: center !important;">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <a href="{{ path('reservation_ron_delete', {'id': camping.idRon.id}) }}" class="btn btn-danger" style="text-align: center !important;">Delete</a>
-
+                                <a href="{{ path('reservation_ron_edit', {'id': camping.id}) }}" class="btn btn-primary" style="text-align: center !important;">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <!--<a href="{{ path('reservation_ron_delete', {'id': camping.id}) }}" class="btn btn-danger" style="text-align: center !important;"onclick="return confirm('voulez-vous vraiment supprimer ceci')">supprimer</a>
+--> 
                             </p>
                         </div>
                     </div>

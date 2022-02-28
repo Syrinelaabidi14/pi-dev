@@ -8,6 +8,7 @@
         <div class="container">
             <div class="row">
                 {% for article in articles %}
+                    {% if article.etat == 'Accepté' %}
                     <div class="col-md-4">
                         <div class="card-box-b card-shadow news-box">
                             <div class="img-box-b">
@@ -31,7 +32,7 @@
                         </div>
                         <a href="{{ path('details_article', {'id': article.id}) }}" class="btn btn-primary">Details</a>
                     </div>
-
+                 {% endif %}
                 {% endfor %}
 
             </div>

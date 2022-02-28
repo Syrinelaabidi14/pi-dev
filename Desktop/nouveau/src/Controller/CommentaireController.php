@@ -59,6 +59,16 @@ class CommentaireController extends AbstractController
         ]);
     }
 
+
+    function filterwords($text){
+        $filterWords = array('fuck', 'pute','bitch');
+        $filterCount = sizeof($filterWords);
+        for ($i = 0; $i < $filterCount; $i++) {
+            $text = preg_replace_callback('/\b' . $filterWords[$i] . '\b/i', function($matches){return str_repeat('*', strlen($matches[0]));}, $text);
+        }
+        return $text;
+    }
+
     /**
      * @Route("/{id}/edit/{ida}", name="commentaire_edit", methods={"GET", "POST"})
      */
@@ -70,6 +80,7 @@ class CommentaireController extends AbstractController
 
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $commentaire->setCommentaire($this->filterwords($commentaire->getCommentaire()));
             $entityManager->flush();
 
             return $this->redirectToRoute('details_article', ['id' => $ida], Response::HTTP_SEE_OTHER);

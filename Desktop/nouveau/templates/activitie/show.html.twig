@@ -1,9 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Activitie{% endblock %}
+{% block title %}Activité {% endblock %}
 
 {% block body %}
-    <h1>Activitie</h1>
+{% for flashMessage in app.session.flashbag.get('notice') %}
+
+                <div class="alert alert-success">
+                    <ul>
+                        <li style="text-align:center"> {{ flashMessage }}</li>
+                    </ul>
+                </div>
+
+            {% endfor %}
+    <h1>Activité</h1>
 
     <table class="table">
         <tbody>

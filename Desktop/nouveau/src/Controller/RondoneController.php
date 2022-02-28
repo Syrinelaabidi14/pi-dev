@@ -17,6 +17,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class RondoneController extends AbstractController
 {
 
+        /**
+     * @Route("/delete/{id}", name="camping_delete")
+     */
+    public function delete($id): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $camping = $em->getRepository(randonnee::class)->find($id);
+        $em->remove($camping);
+        $em->flush();
+        return $this->redirectToRoute('camping_index');
+
+    }
+
     /**
      * @Route("/detailsRon/{id}", name="camping_details", methods={"GET"})
      */
@@ -62,6 +75,10 @@ class RondoneController extends AbstractController
             $camping->getUploadFile();
             $entityManager->persist($camping);
             $entityManager->flush();
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                'Randonnée ajoutée !'
+            );
 
             return $this->redirectToRoute('camping_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -91,6 +108,13 @@ class RondoneController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($camping->getFile() != null){
+                $camping->getUploadFile();
+            }
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                'Randonnée Modifiée !'
+            );
             $entityManager->flush();
 
             return $this->redirectToRoute('camping_index', [], Response::HTTP_SEE_OTHER);
@@ -102,16 +126,5 @@ class RondoneController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/delete/{id}", name="camping_delete")
-     */
-    public function delete($id): Response
-    {
-        $em = $this->getDoctrine()->getManager();
-        $camping = $em->getRepository(randonnee::class)->find($id);
-        $em->remove($camping);
-        $em->flush();
-        return $this->redirectToRoute('camping_index');
 
-    }
 }

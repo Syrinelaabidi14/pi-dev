@@ -38,7 +38,10 @@ class ActivitieController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($activitie);
             $entityManager->flush();
-
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                'Activité ajoutée !'
+            );
             return $this->redirectToRoute('activitie_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -67,8 +70,9 @@ class ActivitieController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
             $entityManager->flush();
-
+   
             return $this->redirectToRoute('activitie_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -86,6 +90,7 @@ class ActivitieController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $activite = $em->getRepository(Activitie::class)->find($id);
         $em->remove($activite);
+      
         $em->flush();
         return $this->redirectToRoute('activitie_index');
     }

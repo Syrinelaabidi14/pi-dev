@@ -18,9 +18,11 @@
                                 <div class="card-title-b">
                                     <h2 class="title-2">
                                         <a href="#">
-                                            {{ article.titre }}
+                                           Titre: {{ article.titre }}<br>
                                         </a>
                                     </h2>
+                                    Etat : {{ article.etat }}
+
                                 </div>
                                 <div class="card-date">
                                     <span class="date-b">{{ article.dateEcrit ? article.dateEcrit|date('Y-m-d') : '' }}</span>
@@ -29,8 +31,11 @@
                         </div>
 
                     </div>
+                    {% if article.etat != 'en attent' %}
+                    {% else %}
                     <a href="{{ path('article_edit', {'id': article.id}) }}" class="btn btn-primary">Edit</a>
                     <a href="{{ path('article_delete', {'id': article.id}) }}" class="btn btn-danger">Delete</a>
+                        {% endif %}
                 </div>
 
                 {% endfor %}

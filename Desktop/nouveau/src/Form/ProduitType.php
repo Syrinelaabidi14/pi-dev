@@ -8,6 +8,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ProduitType extends AbstractType
 {
@@ -18,7 +19,7 @@ class ProduitType extends AbstractType
             ->add('description')
             ->add('prix')
             ->add('stock')
-            ->add('file')
+            ->add('file',VichImageType::class)
             ->add('idCategorie',EntityType::class, array(
                 'class' => Categorie::class,
                 'choice_label' => 'nom',

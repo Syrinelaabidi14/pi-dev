@@ -37,6 +37,11 @@ class Article
      * @ORM\Column(type="string", length=255)
      */
     private $description;
+    /**
+     * @Assert\NotBlank
+     * @ORM\Column(type="string", length=255)
+     */
+    private $etat;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -101,7 +106,7 @@ class Article
      *
      * @ORM\ManyToOne(targetEntity="Users")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_User", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_User", referencedColumnName="id", onDelete="CASCADE")
      * })
      */
     private $idUser;
@@ -173,6 +178,22 @@ class Article
     public function setFile($file): void
     {
         $this->file = $file;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEtat()
+    {
+        return $this->etat;
+    }
+
+    /**
+     * @param mixed $etat
+     */
+    public function setEtat($etat): void
+    {
+        $this->etat = $etat;
     }
 
 

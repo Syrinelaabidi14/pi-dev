@@ -13,7 +13,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Dompdf\Dompdf;
+use Dompdf\Options;
 /**
  * @Route("/article")
  */
@@ -30,6 +31,24 @@ class ArticleController extends AbstractController
     }
 
     /**
+     * @Route("/adminarticle", name="article_admin", methods={"GET"})
+     */
+    public function indexAllAdmin(ArticleRepository $articleRepository): Response
+    {
+        return $this->render('article/adminindex.html.twig', [
+            'articles' => $articleRepository->findAll(),
+        ]);
+    }
+
+    function filterwords($text){
+        $filterWords = array('fuck', 'pute','bitch');
+        $filterCount = sizeof($filterWords);
+        for ($i = 0; $i < $filterCount; $i++) {
+            $text = preg_replace_callback('/\b' . $filterWords[$i] . '\b/i', function($matches){return str_repeat('*', strlen($matches[0]));}, $text);
+        }
+        return $text;
+    }
+    /**
      * @Route("/details/{id}", name="details_article")
      */
     public function details(ArticleRepository $articleRepository,CommentaireRepository $commentaireRepository,$id,Request $request , EntityManagerInterface $entityManager): Response
@@ -41,6 +60,7 @@ class ArticleController extends AbstractController
 
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $commentaire->setCommentaire($this->filterwords($commentaire->getCommentaire()));
             $commentaire->setIdUser($this->getUser());
             $commentaire->setIdArticle($articleRepository->find($id));
             $entityManager->persist($commentaire);
@@ -80,6 +100,7 @@ class ArticleController extends AbstractController
             $article->getUploadFile();
             $article->setIdUser($this->getUser());
             $article->setDateEcrit(new \DateTime());
+            $article->setEtat('en attent');
             $entityManager->persist($article);
             $entityManager->flush();
 
@@ -111,6 +132,9 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($article->getFile() != null){
+                $article->getUploadFile();
+            }
             $entityManager->flush();
 
             return $this->redirectToRoute('article_index', [], Response::HTTP_SEE_OTHER);
@@ -132,5 +156,68 @@ class ArticleController extends AbstractController
         $em->remove($categorie);
         $em->flush();
         return $this->redirectToRoute('article_index');
+    }
+
+
+    /**
+     * @Route("/accepter/{id}", name="article_accepter", methods={"GET","POST"})
+     */
+    public function accepter(Request $request,  $id): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $article = $em->getRepository(Article::class)->find($id);
+        $article->setEtat('Accepté');
+        $this->getDoctrine()->getManager()->persist($article);
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirectToRoute('article_admin', [], Response::HTTP_SEE_OTHER);
+
+    }
+
+    /**
+     * @Route("/refuser/{id}", name="article_refuser", methods={"GET","POST"})
+     */
+    public function refuser(Request $request,  $id): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $article = $em->getRepository(Article::class)->find($id);
+        $article->setEtat('refuser');
+        $this->getDoctrine()->getManager()->persist($article);
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirectToRoute('article_admin', [], Response::HTTP_SEE_OTHER);
+
+    }
+
+    /**
+     * @Route("/pdf/{id}", name="article_pdf", methods={"GET","POST"})
+     */
+    public function articlepdf($id ,ArticleRepository $articleRepository)
+    {
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('article/mypdf.html.twig', [
+            'article' => $articleRepository->find($id)
+        ]);
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (inline view)
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => false
+        ]);
     }
 }

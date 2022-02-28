@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\LocationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=LocationRepository::class)
@@ -18,7 +20,13 @@ class Location
     private $id;
 
     /**
+     *
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank
+     *  @Assert\Range(
+     *      min = 1,
+     *      notInRangeMessage = "quantite doit etre minimum 1",
+     * )
      */
     private $quantite;
 
@@ -78,7 +86,7 @@ class Location
      *
      * @ORM\ManyToOne(targetEntity="Users")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_User", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_User", referencedColumnName="id", onDelete="CASCADE")
      * })
      */
     private $idUser;
@@ -89,7 +97,7 @@ class Location
      *
      * @ORM\ManyToOne(targetEntity="Produit")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_Produit", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_Produit", referencedColumnName="id", onDelete="CASCADE")
      * })
      */
     private $idProduit;

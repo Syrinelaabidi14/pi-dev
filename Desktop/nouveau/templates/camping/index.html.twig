@@ -2,13 +2,23 @@
 
 
 {% block body %}
-    <h1>Camping List</h1><br><br><br>
+    <h1>liste des randonnées </h1><br><br><br>
 
     <table class="table">
+      {% for flashMessage in app.session.flashbag.get('notice') %}
+
+                <div class="alert alert-success">
+                    <ul>
+                        <li style="text-align:center"> {{ flashMessage }}</li>
+                    </ul>
+                </div>
+
+            {% endfor %}
         <thead>
             <tr>
                 <th>Nom</th>
                 <th>Prix</th>
+                <th>nombre de participant </th>
                 <th>Localisation</th>
                 <th>DateDeb</th>
                 <th>Activite</th>
@@ -21,13 +31,14 @@
             <tr>
                 <td>{{ camping.nom }}</td>
                 <td>{{ camping.prix }}</td>
+                <td>{{ camping.nbrPlace}}</td>
                 <td>{{ camping.localisation }}</td>
                 <td>{{ camping.dateDeb ? camping.dateDeb|date('Y-m-d') : '' }}</td>
                 <td>{{ camping.idActivite.nom }}</td>
                 <td><img src="{{ asset('Upload/')}}{{ camping.image }}" width="100"  /></td>
                 <td>
-                    <a href="{{ path('camping_edit', {'id': camping.id}) }}" class="btn btn-primary">Edit</a>
-                    <a href="{{ path('camping_delete', {'id': camping.id}) }}" class="btn btn-danger">Delete</a>
+                    <a href="{{ path('camping_edit', {'id': camping.id}) }}" class="btn btn-primary">modifier</a>
+                    <a href="{{ path('camping_delete', {'id': camping.id}) }}" class="btn btn-danger"onclick="return confirm('voulez-vous vraiment supprimer ceci')">supprimer</a>
 
                 </td>
             </tr>

@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>EstateAgency Bootstrap Template - Index</title>
+  <title>BaseCampAgency Bootstrap Template - Index</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -40,7 +40,7 @@
 <!--/ Form Search Star /-->
 <div class="box-collapse">
   <div class="title-box-d">
-    <h3 class="title-d">Search Property</h3>
+    <h3 class="title-d">Rechercher randonnée </h3>
   </div>
   <span class="close-box-collapse right-boxed bi bi-x"></span>
   <div class="box-collapse-wrap form">
@@ -137,36 +137,23 @@
       <span></span>
       <span></span>
     </button>
-    <a class="navbar-brand text-brand" href="index.html">Estate<span class="color-b">Agency</span></a>
+    <a class="navbar-brand text-brand" href="index.html">BaseCamp<span class="color-b">Agency</span></a>
 
     <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
       <ul class="navbar-nav">
 
         <li class="nav-item">
-          <a class="nav-link active" href="index.html">Home</a>
+          <a class="nav-link active" href="{{ path('camping_front') }}">Randonnee</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link " href="about.html">About</a>
+          <a class="nav-link " href="{{ path('produit_Front') }}">Produit</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link " href="property-grid.html">Property</a>
+          <a class="nav-link " href="{{ path('article_alll') }}">All Article</a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link " href="blog-grid.html">Blog</a>
-        </li>
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item " href="property-single.html">Property Single</a>
-            <a class="dropdown-item " href="blog-single.html">Blog Single</a>
-            <a class="dropdown-item " href="agents-grid.html">Agents Grid</a>
-            <a class="dropdown-item " href="agent-single.html">Agent Single</a>
-          </div>
-        </li>
         <li class="nav-item">
           <a class="nav-link " href="{{ path('article_new') }}">Add Post</a>
         </li>
@@ -185,7 +172,7 @@
 
   <div class="swiper-wrapper">
 
-    <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url({{ asset('front/assets/img/slide-1.jpg') }})">
+    <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url({{ asset('front/assets/img/cap1.jpg') }})">
       <div class="overlay overlay-a"></div>
       <div class="intro-content display-table">
         <div class="table-cell">
@@ -193,15 +180,16 @@
             <div class="row">
               <div class="col-lg-8">
                 <div class="intro-body">
-                  <p class="intro-title-top">Doral, Florida
-                    <br> 78345
+                  <p class="intro-title-top">
+                    <br>
                   </p>
                   <h1 class="intro-title mb-4 ">
-                    <span class="color-b">204 </span> Mount
-                    <br> Olive Road Two
+                    <span class="color-b"> </span>
+                    <br>
+                    
                   </h1>
                   <p class="intro-subtitle intro-price">
-                    <a href="#"><span class="price-a">rent | $ 12.000</span></a>
+                    <a href="#"><span class="price-a">Prix | 120 dinar</span></a>
                   </p>
                 </div>
               </div>
@@ -210,7 +198,7 @@
         </div>
       </div>
     </div>
-    <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url({{ asset('front/assets/img/slide-2.jpg') }})">
+    <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url({{ asset('front/assets/img/cap2.jpg') }})">
       <div class="overlay overlay-a"></div>
       <div class="intro-content display-table">
         <div class="table-cell">
@@ -218,15 +206,15 @@
             <div class="row">
               <div class="col-lg-8">
                 <div class="intro-body">
-                  <p class="intro-title-top">Doral, Florida
-                    <br> 78345
+                  <p class="intro-title-top">
+                    <br>
                   </p>
                   <h1 class="intro-title mb-4">
-                    <span class="color-b">204 </span> Rino
-                    <br> Venda Road Five
+                    <span class="color-b"> </span>
+                    <br>
                   </h1>
                   <p class="intro-subtitle intro-price">
-                    <a href="#"><span class="price-a">rent | $ 12.000</span></a>
+                    <a href="#"><span class="price-a">Prix | 200 dinar</span></a>
                   </p>
                 </div>
               </div>
@@ -235,7 +223,7 @@
         </div>
       </div>
     </div>
-    <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url({{ asset('front/assets/img/slide-3.jpg') }})">
+    <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url({{ asset('front/assets/img/cap3.jpg') }})">
       <div class="overlay overlay-a"></div>
       <div class="intro-content display-table">
         <div class="table-cell">
@@ -243,15 +231,15 @@
             <div class="row">
               <div class="col-lg-8">
                 <div class="intro-body">
-                  <p class="intro-title-top">Doral, Florida
-                    <br> 78345
+                  <p class="intro-title-top">
+                    <br>
                   </p>
                   <h1 class="intro-title mb-4">
-                    <span class="color-b">204 </span> Alira
-                    <br> Roan Road One
+                    <span class="color-b"> </span>
+                    <br>
                   </h1>
                   <p class="intro-subtitle intro-price">
-                    <a href="#"><span class="price-a">rent | $ 12.000</span></a>
+                    <a href="#"><span class="price-a">Prix | 60 dinar</span></a>
                   </p>
                 </div>
               </div>
@@ -296,118 +284,11 @@
 </main><!-- End #main -->
 
 <!-- ======= Footer ======= -->
-<section class="section-footer">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12 col-md-4">
-        <div class="widget-a">
-          <div class="w-header-a">
-            <h3 class="w-title-a text-brand">EstateAgency</h3>
-          </div>
-          <div class="w-body-a">
-            <p class="w-text-a color-text-a">
-              Enim minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip exea commodo consequat duis
-              sed aute irure.
-            </p>
-          </div>
-          <div class="w-footer-a">
-            <ul class="list-unstyled">
-              <li class="color-a">
-                <span class="color-text-a">Phone .</span> contact@example.com
-              </li>
-              <li class="color-a">
-                <span class="color-text-a">Email .</span> +54 356 945234
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-12 col-md-4 section-md-t3">
-        <div class="widget-a">
-          <div class="w-header-a">
-            <h3 class="w-title-a text-brand">The Company</h3>
-          </div>
-          <div class="w-body-a">
-            <div class="w-body-a">
-              <ul class="list-unstyled">
-                <li class="item-list-a">
-                  <i class="bi bi-chevron-right"></i> <a href="#">Site Map</a>
-                </li>
-                <li class="item-list-a">
-                  <i class="bi bi-chevron-right"></i> <a href="#">Legal</a>
-                </li>
-                <li class="item-list-a">
-                  <i class="bi bi-chevron-right"></i> <a href="#">Agent Admin</a>
-                </li>
-                <li class="item-list-a">
-                  <i class="bi bi-chevron-right"></i> <a href="#">Careers</a>
-                </li>
-                <li class="item-list-a">
-                  <i class="bi bi-chevron-right"></i> <a href="#">Affiliate</a>
-                </li>
-                <li class="item-list-a">
-                  <i class="bi bi-chevron-right"></i> <a href="#">Privacy Policy</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-12 col-md-4 section-md-t3">
-        <div class="widget-a">
-          <div class="w-header-a">
-            <h3 class="w-title-a text-brand">International sites</h3>
-          </div>
-          <div class="w-body-a">
-            <ul class="list-unstyled">
-              <li class="item-list-a">
-                <i class="bi bi-chevron-right"></i> <a href="#">Venezuela</a>
-              </li>
-              <li class="item-list-a">
-                <i class="bi bi-chevron-right"></i> <a href="#">China</a>
-              </li>
-              <li class="item-list-a">
-                <i class="bi bi-chevron-right"></i> <a href="#">Hong Kong</a>
-              </li>
-              <li class="item-list-a">
-                <i class="bi bi-chevron-right"></i> <a href="#">Argentina</a>
-              </li>
-              <li class="item-list-a">
-                <i class="bi bi-chevron-right"></i> <a href="#">Singapore</a>
-              </li>
-              <li class="item-list-a">
-                <i class="bi bi-chevron-right"></i> <a href="#">Philippines</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+
 <footer>
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <nav class="nav-footer">
-          <ul class="list-inline">
-            <li class="list-inline-item">
-              <a href="#">Home</a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">About</a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">Property</a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">Blog</a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">Contact</a>
-            </li>
-          </ul>
-        </nav>
         <div class="socials-a">
           <ul class="list-inline">
             <li class="list-inline-item">
@@ -435,7 +316,7 @@
         <div class="copyright-footer">
           <p class="copyright color-text-a">
             &copy; Copyright
-            <span class="color-a">EstateAgency</span> All Rights Reserved.
+            <span class="color-a">BaseCampAgency</span> All Rights Reserved.
           </p>
         </div>
         <div class="credits">

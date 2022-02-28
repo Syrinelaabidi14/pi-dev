@@ -27,7 +27,7 @@ class randonnee
     private $nom;
 
     /**
-     *
+     *@Assert\NotBlank
      * @ORM\Column(type="float")
      */
     private $prix;
@@ -39,7 +39,8 @@ class randonnee
 
     /**
      * @Assert\Range(
-     *      min = 0,
+     *      min = 1,
+     * 
      *      notInRangeMessage = "You must be bigger than 0 to enter",
      * )
      * @ORM\Column(type="integer")
@@ -59,7 +60,7 @@ class randonnee
      *
      * @ORM\ManyToOne(targetEntity="Activitie")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_activ", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_activ", referencedColumnName="id", onDelete="CASCADE")
      * })
      */
     private $idActivite;

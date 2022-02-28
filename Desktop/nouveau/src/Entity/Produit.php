@@ -8,9 +8,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 
 /**
  * @ORM\Entity(repositoryClass=ProduitRepository::class)
+ * @Vich\Uploadable
  */
 class Produit
 {
@@ -34,7 +37,11 @@ class Produit
     private $description;
 
     /**
-     *
+     * @Assert\Range(
+     *      min = 1,
+     *      notInRangeMessage = "prix doit étre superieur a 0",
+     * )
+     * @Assert\NotBlank
      * @ORM\Column(type="float")
      */
     private $prix;
@@ -42,6 +49,10 @@ class Produit
     /**
      * @Assert\NotBlank
      * @ORM\Column(type="integer")
+     * @Assert\Range(
+     *      min = 1,
+     *      notInRangeMessage = "stock doit étre supérieur a 1",
+     * )
      */
     private $stock;
 
@@ -50,8 +61,13 @@ class Produit
      */
     private $image;
 
+
     /**
-     * @Assert\File(maxSize="500000000k")
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @Vich\UploadableField(mapping="produitimage", fileNameProperty="image")
+     *
+     * @var File|null
      */
     public  $file;
 
@@ -176,9 +192,14 @@ class Produit
     {
         return $this->file;
     }
-
     /**
-     * @param mixed $file
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $file
      */
     public function setFile($file): void
     {
@@ -193,7 +214,7 @@ class Produit
      *
      * @ORM\ManyToOne(targetEntity="Categorie")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_Categorie", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_Categorie", referencedColumnName="id",onDelete="CASCADE")
      * })
      */
     private $idCategorie;

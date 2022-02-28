@@ -79,6 +79,13 @@ class SponsorController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if ($sponsor->getFile() != null){
+                $sponsor->getUploadFile();
+            }
+            if ($sponsor->getFileimage() != null){
+                $sponsor->getUploadFileImage();
+            }
             $entityManager->flush();
 
             return $this->redirectToRoute('sponsor_index', [], Response::HTTP_SEE_OTHER);

@@ -1,7 +1,7 @@
 
 {% extends 'base.html.twig' %}
 
-{% block title %} Our Rondonne {% endblock %}
+{% block title %} nos randonnées {% endblock %}
 {% block body %}
         {% for camping in campings %}
 
@@ -29,7 +29,7 @@
                                     <strong>Date: </strong> {{ camping.dateDeb ? camping.dateDeb|date('Y-m-d') : '' }}
                                 </p>
                                 <p>
-                                    <strong>Prix: </strong> {{ camping.prix }}<br><br><br><br>
+                                    <strong>Prix: </strong> {{ camping.prix }}
                                 </p>
                                 <p>
                                     <a href="{{ path('camping_details', {'id': camping.id}) }}" style="text-align: center !important;">Details</a>

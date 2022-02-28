@@ -98,8 +98,8 @@ class ReservationRonController extends AbstractController
     public function delete(Request $request,$id, ReservationRon $reservationRon, EntityManagerInterface $entityManager): Response
     {
         $em = $this->getDoctrine()->getManager();
-        $produit = $em->getRepository(ReservationRon::class)->find($id);
-        $em->remove($produit);
+        $reservationRon = $em->getRepository(ReservationRon::class)->find($id);
+        $em->remove($reservationRon);
         $em->flush();
         return $this->redirectToRoute('reservation_ron_participation');
     }

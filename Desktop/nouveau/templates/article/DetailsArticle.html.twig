@@ -14,7 +14,9 @@
                             <div class="row">
                                 <div class="col-sm-12 col-md-6">
                                     <div class="testimonial-img">
-                                        <img src="{{ asset('Upload/')}}{{ article.image }}" alt="" class="img-fluid">
+                                        <img src="{{ asset('Upload/')}}{{ article.image }}" alt="" class="img-fluid"><br><br>
+                                        <a href="{{ path('article_pdf', {'id': article.id}) }}" class="btn btn-success">Extracter Article</a>
+
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-md-6">

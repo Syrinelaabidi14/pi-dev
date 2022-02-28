@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ReservationRonRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ReservationRonRepository::class)
@@ -18,6 +19,12 @@ class ReservationRon
     private $id;
 
     /**
+     * @Assert\Range(
+     *      min = 1,
+     *     max=10,
+     *      notInRangeMessage = "nombre de personnes doit étre superieur à 0 et ne doit pas dépasser 10 places ",
+     * )
+     * @Assert\NotBlank
      * @ORM\Column(type="integer")
      */
     private $nbrPersonne;
@@ -37,7 +44,7 @@ class ReservationRon
      *
      * @ORM\ManyToOne(targetEntity="Users")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_User", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_User", referencedColumnName="id", onDelete="CASCADE")
      * })
      */
     private $idUser;
@@ -48,7 +55,7 @@ class ReservationRon
      *
      * @ORM\ManyToOne(targetEntity="randonnee")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_randonnee", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_randonnee", referencedColumnName="id", onDelete="CASCADE")
      * })
      */
     private $idron;

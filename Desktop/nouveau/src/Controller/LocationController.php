@@ -48,8 +48,10 @@ class LocationController extends AbstractController
         $form->handleRequest($request);
         $produit = $produitRepository->find($id);
         if ($form->isSubmitted() && $form->isValid()) {
+            $produit->setStock($produit->getStock()-$location->getQuantite());
             $location->setIdUser($this->getUser());
             $location->setIdProduit($produit);
+            $entityManager->persist($produit);
             $entityManager->persist($location);
             $entityManager->flush();
 
